@@ -12,7 +12,10 @@ public class Main extends JavaPlugin
 		{
 			public void run()
 			{
-				for(Player p : Bukkit.getOnlinePlayers()) {p.giveExp(1);}				
+				for(Player p : Bukkit.getOnlinePlayers()) 
+				{
+					p.giveExp(1);
+			        }				
 			}
 		}, 0, 200);
 	}
