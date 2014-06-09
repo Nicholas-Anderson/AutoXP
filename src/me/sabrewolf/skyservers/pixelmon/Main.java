@@ -32,8 +32,8 @@ public class Main extends JavaPlugin
 			}
 			else if (CurrentExp > 150) 
 			{
-					if (!ess.getUser(p).isJailed() == true)
-						ess.getUser(p).giveExp(1);
+				if (!ess.getUser(p).isJailed() == true)
+					ess.getUser(p).giveExp(1);
 			}
 			else 
 			{
