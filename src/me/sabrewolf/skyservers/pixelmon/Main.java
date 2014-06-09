@@ -3,6 +3,9 @@ package me.sabrewolf.skyservers.pixelmon;
 import java.io.File;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import com.earth2me.essentials.Essentials;
@@ -14,11 +17,11 @@ public class Main extends JavaPlugin {
 	public void onEnable() {
 		File file = new File(getDataFolder() + File.separator + "config.yml");
 		if (!file.exists()) {
-			this.getLogger().info("Generating the config..");
+			getLogger().info("Generating the config..");
 
-			this.getConfig().addDefault("time", 100);
-			this.getConfig().options().copyDefaults(true);
-			this.saveConfig();
+			getConfig().addDefault("time", 100);
+			getConfig().options().copyDefaults(true);
+			saveConfig();
 		}
 		getServer().getScheduler().scheduleSyncRepeatingTask(this,
 				new Runnable() {
@@ -33,7 +36,6 @@ public class Main extends JavaPlugin {
 	public void giveXp() {
 		for (Player p : Bukkit.getOnlinePlayers()) {
 			float CurrentExp = p.getTotalExperience();
-			System.out.println(!ess.getUser(p).isAfk());
 			if (!(ess.getUser(p).isJailed() == true)) {
 				if ((!ess.getUser(p).isAfk() == true)) {
 
@@ -45,6 +47,42 @@ public class Main extends JavaPlugin {
 				}
 			}
 		}
+	}
+
+	// Commands
+	@Override
+	public boolean onCommand(CommandSender sender, Command cmd, String label,
+			String[] args) {
+		if (cmd.getName().equalsIgnoreCase("autoexp"))
+		{
+			if(args.length == 0){
+				sender.sendMessage("§b=-----------------+  §9 Auto exp §b  +-----------------=");
+				sender.sendMessage("§b= §3Available commands§f:");
+				if (sender.hasPermission("autoexp.reload")) {
+					sender.sendMessage("§b=  §5  - §a /autoexp §creload  §f-§e  Reloads the configration.");
+				}
+				
+				sender.sendMessage("§b=---------------------------------------------------=");
+				return true;
+			}
+		}
+
+		if (args[0].equalsIgnoreCase("reload")) {
+
+			if (sender.hasPermission("autoexp.reload")) {
+				reloadConfig();
+				saveConfig();
+				sender.sendMessage(ChatColor.GREEN
+						+ "Configuration has been Reloaded!");
+				return true;
+			}
+			sender.sendMessage(ChatColor.RED
+					+ "You're not allowed to use that!");
+			return true;
+
+		}
+		return false;
+
 	}
 
 }
