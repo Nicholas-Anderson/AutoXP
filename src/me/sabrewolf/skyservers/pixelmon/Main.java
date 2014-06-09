@@ -9,11 +9,27 @@ public class Main extends JavaPlugin {
 		getServer().getScheduler().scheduleSyncRepeatingTask(this,
 				new Runnable() {
 					public void run() {
-						for (Player p : Bukkit.getOnlinePlayers()) {
-							p.giveExp(1);
+						giveXp();
 						}
+
+					private void giveXp() {
+						// TODO Auto-generated method stub
+						for (Player p : Bukkit.getOnlinePlayers())
+						{
+							float CurrentExp = p.getExp();
+							if (CurrentExp > 300){
+								p.giveExp(1);
+							}
+							if (CurrentExp < 300){
+								p.giveExp(5);
+							}						
+						
+					}
 					}
 				}, 0, 200);
+
 	}
 
+		
+	
 }
