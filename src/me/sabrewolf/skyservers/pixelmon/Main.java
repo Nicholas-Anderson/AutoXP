@@ -24,20 +24,23 @@ public class Main extends JavaPlugin {
 		for (Player p : Bukkit.getOnlinePlayers()) {
 			float CurrentExp = p.getTotalExperience();
 			if (CurrentExp < 150) {
-				if (!ess.getUser(p).isJailed() == true
-						|| (!ess.getUser(p).isAfk()))
+				if ((!ess.getUser(p).isJailed() == true)) {
 					ess.getUser(p).giveExp(3);
+
+				}
+				// nothing
 
 			} else {
 				// nothing
 			}
 			if (CurrentExp > 150) {
-				if (!ess.getUser(p).isJailed() == true
-						|| (!ess.getUser(p).isAfk()))
+				if ((!ess.getUser(p).isJailed() == false)) {
 					ess.getUser(p).giveExp(1);
+				}
 			} else {
 				// nothing
 			}
 		}
+
 	}
 }
