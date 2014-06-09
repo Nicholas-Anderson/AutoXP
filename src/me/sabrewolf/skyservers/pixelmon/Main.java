@@ -14,10 +14,8 @@ public class Main extends JavaPlugin {
 						}
 					}
 				}, 0, 200);
-<<<<<<< HEAD
 	}
 
-=======
-}
->>>>>>> cc9138cdfdb78293cc1cf21fc82ff70df2d08fbb
+	
+
 }
