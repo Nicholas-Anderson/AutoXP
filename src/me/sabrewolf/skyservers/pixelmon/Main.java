@@ -62,7 +62,7 @@ public class Main extends JavaPlugin {
 		// Information on commands
 		if (cmd.getName().equalsIgnoreCase("autoexp")) {
 			if (args.length == 0) {
-				sender.sendMessage("§b=-----------------+  §9 Auto exp §b  +-----------------=");
+				sender.sendMessage("§b=-----------------+  §9 AutoExp §b  +-----------------=");
 				sender.sendMessage("§b= §3Available commands§f:");
 				if (sender.hasPermission("autoexp.reload")) {
 					sender.sendMessage("§b=  §5  - §a /autoexp §creload  §f-§e  Reloads the configration.");
