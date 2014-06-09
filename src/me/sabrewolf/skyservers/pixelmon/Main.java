@@ -41,11 +41,9 @@ public class Main extends JavaPlugin {
 			float CurrentExp = p.getTotalExperience();
 			if (!(ess.getUser(p).isJailed() == true)) {
 				if ((!ess.getUser(p).isAfk() == true)) {
-
 					if (CurrentExp < getConfig().getInt("minExpPoints")) {
 						ess.getUser(p).giveExp(
 								getConfig().getInt("expGivenForUnderMin"));
-
 					} else {
 						ess.getUser(p).giveExp(
 								getConfig().getInt("expGivenForAboveMin"));
@@ -67,13 +65,11 @@ public class Main extends JavaPlugin {
 				if (sender.hasPermission("autoexp.reload")) {
 					sender.sendMessage("§b=  §5  - §a /autoexp §creload  §f-§e  Reloads the configration.");
 				}
-
 				sender.sendMessage("§b=---------------------------------------------------=");
 				return true;
 			}
 		}
 		// Reload command
-
 		if (args[0].equalsIgnoreCase("reload")) {
 
 			if (sender.hasPermission("autoexp.reload")) {
@@ -81,13 +77,11 @@ public class Main extends JavaPlugin {
 				saveConfig();
 				sender.sendMessage(ChatColor.GREEN
 						+ "Configuration has been Reloaded!");
-
 				return true;
 			}
 			sender.sendMessage(ChatColor.RED
 					+ "You're not allowed to use that!");
 			return true;
-
 		}
 		return false;
 
