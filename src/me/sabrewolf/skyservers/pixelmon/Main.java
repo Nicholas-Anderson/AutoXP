@@ -34,7 +34,6 @@ public class Main extends JavaPlugin {
 				}, 0, getConfig().getInt("time")); // this is in ticks (time)
 
 	}
-	//Create the Scheduld task method.
 	
 	// Initialise giving their Exp
 	public void giveXp() {
