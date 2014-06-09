@@ -5,14 +5,13 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import com.earth2me.essentials.Essentials;
 
-public class Main extends JavaPlugin {
-	// public static ess = com.earth2me.essentials.commands.Commandexp;
-	Essentials ess = (Essentials) Bukkit.getServer().getPluginManager()
-			.getPlugin("Essentials");
+public class Main extends JavaPlugin 
+{
+	Essentials ess = (Essentials) Bukkit.getServer().getPluginManager().getPlugin("Essentials");
 
-	public void onEnable() {
-		getServer().getScheduler().scheduleSyncRepeatingTask(this,
-				new Runnable() {
+	public void onEnable() 
+	{
+		getServer().getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
 					public void run() {
 						giveXp();
 					}
@@ -21,15 +20,24 @@ public class Main extends JavaPlugin {
 	}
 
 	// Initialise giving their Exp
-	public void giveXp() {
-		for (Player p : Bukkit.getOnlinePlayers()) {
+	public void giveXp() 
+	{
+		for (Player p : Bukkit.getOnlinePlayers()) 
+		{
 			float CurrentExp = p.getTotalExperience();
-			if (CurrentExp < 150) {
-
-				ess.getUser(p).giveExp(3);
-			} else {
-
-				ess.getUser(p).giveExp(1);
+			if (CurrentExp < 150) 
+			{
+				if (!ess.getUser(p).isJailed() == true)
+				        ess.getUser(p).giveExp(3);
+			}
+			else if (CurrentExp > 150) 
+			{
+					if (!ess.getUser(p).isJailed() == true)
+						ess.getUser(p).giveExp(1);
+			}
+			else 
+			{
+				//nothing
 			}
 		}
 	}
