@@ -20,6 +20,9 @@ public class Main extends JavaPlugin {
 			getLogger().info("Generating the config..");
 
 			getConfig().addDefault("time", 100);
+			getConfig().addDefault("minExpPoints", 150);
+			getConfig().addDefault("expGivenForUnderMin", 3);
+			getConfig().addDefault("expGivenForAboveMin", 1);
 			getConfig().options().copyDefaults(true);
 			saveConfig();
 		}
@@ -28,7 +31,7 @@ public class Main extends JavaPlugin {
 					public void run() {
 						giveXp();
 					}
-				}, 0, getConfig().getInt("time"));
+				}, 0, getConfig().getInt("time")); // this is in ticks (time)
 
 	}
 
@@ -39,10 +42,13 @@ public class Main extends JavaPlugin {
 			if (!(ess.getUser(p).isJailed() == true)) {
 				if ((!ess.getUser(p).isAfk() == true)) {
 
-					if (CurrentExp < 150) {
-						ess.getUser(p).giveExp(3);
+					if (CurrentExp < getConfig().getInt("minExpPoints")) {
+						ess.getUser(p).giveExp(
+								getConfig().getInt("expGivenForUnderMin"));
+
 					} else {
-						ess.getUser(p).giveExp(1);
+						ess.getUser(p).giveExp(
+								getConfig().getInt("expGivenForAboveMin"));
 					}
 				}
 			}
@@ -53,19 +59,20 @@ public class Main extends JavaPlugin {
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label,
 			String[] args) {
-		if (cmd.getName().equalsIgnoreCase("autoexp"))
-		{
-			if(args.length == 0){
+		// Information on commands
+		if (cmd.getName().equalsIgnoreCase("autoexp")) {
+			if (args.length == 0) {
 				sender.sendMessage("§b=-----------------+  §9 Auto exp §b  +-----------------=");
 				sender.sendMessage("§b= §3Available commands§f:");
 				if (sender.hasPermission("autoexp.reload")) {
 					sender.sendMessage("§b=  §5  - §a /autoexp §creload  §f-§e  Reloads the configration.");
 				}
-				
+
 				sender.sendMessage("§b=---------------------------------------------------=");
 				return true;
 			}
 		}
+		// Reload command
 
 		if (args[0].equalsIgnoreCase("reload")) {
 
@@ -74,6 +81,7 @@ public class Main extends JavaPlugin {
 				saveConfig();
 				sender.sendMessage(ChatColor.GREEN
 						+ "Configuration has been Reloaded!");
+
 				return true;
 			}
 			sender.sendMessage(ChatColor.RED
