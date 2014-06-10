@@ -91,12 +91,12 @@ public class Main extends JavaPlugin implements Listener
 								this.reloadConfig();
 								sender.sendMessage(ChatColor.GREEN
 										+ "Configuration has been Reloaded!");
+                                                                Bukkit.getPluginManager().disablePlugin(this);
+						                Bukkit.getPluginManager().enablePlugin(this);
 								return true;
 							}
 						sender.sendMessage(ChatColor.RED
 								+ "You're not allowed to use that!");
-						Bukkit.getPluginManager().disablePlugin(this);
-						Bukkit.getPluginManager().enablePlugin(this);
 						return true;
 					}
 					//setval command
