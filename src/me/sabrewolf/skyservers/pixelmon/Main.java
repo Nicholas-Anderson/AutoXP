@@ -79,7 +79,6 @@ public class Main extends JavaPlugin implements Listener {
 		// Reload command
 		if (args[0].equalsIgnoreCase("reload")) {
 			if (sender.hasPermission("autoexp.reload")) {
-
 				this.reloadConfig();
 				sender.sendMessage(ChatColor.GREEN
 						+ "Configuration has been Reloaded!");
@@ -110,11 +109,45 @@ public class Main extends JavaPlugin implements Listener {
 							+ "\" set to \"" + args[2] + "\"");
 					Bukkit.getPluginManager().disablePlugin(this);
 					Bukkit.getPluginManager().enablePlugin(this);
+								this.reloadConfig();
+								sender.sendMessage(ChatColor.GREEN
+										+ "Configuration has been Reloaded!");
+                                                                Bukkit.getPluginManager().disablePlugin(this);
+						                Bukkit.getPluginManager().enablePlugin(this);
+								return true;
+							}
+						sender.sendMessage(ChatColor.RED
+								+ "You're not allowed to use that!");
+						return true;
+					}
+					//setval command
+				else if (args[0].equalsIgnoreCase("setval"))
+						{
+							if (sender.hasPermission("autoexp.setval"))
+								{
+									if (args.length == 1 || args.length == 2)
+										{
+											sender.sendMessage(ChatColor.RED + "Usage: /autoexp setval (expGivenForAboveMin / expGivenForUnderMin / minExpPoints / timeInSeconds) (value)");
+										}
+									else
+										if (args.length > 1)
+											{
+												int num = Integer.parseInt(args[2]);
+												this.getConfig().set(args[1], num);
+												this.saveConfig();
+												this.reloadConfig();
+												sender.sendMessage(ChatColor.GREEN
+														+ "Configuration value \"" + args[1]
+														+ "\" set to \"" + args[2] + "\"");
+												Bukkit.getPluginManager().disablePlugin(this);
+												Bukkit.getPluginManager().enablePlugin(this);
+											}
+								}
+							return true;
+						}
+				return false;
 
 				}
-			}
-			return true;
-		}
 		return false;
 
 	}
