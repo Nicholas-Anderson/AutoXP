@@ -1,0 +1,14 @@
+main: me.sabrewolf.skyservers.pixelmon.Main
+name: AutoExp
+author: _SaBrEWoLf, pvmac2194
+version: 0.1
+depend: [Essentials]
+commands:
+    autoexp:
+        description: /autoexp <Command>
+        usage: /autoexp
+permissions:
+  autoexp.reload:
+    description: Allows the admin to reload the configuration.
+  autoexp.setval:
+    description: Allows the admin to set AutoExp's variables.

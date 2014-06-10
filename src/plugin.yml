@@ -1,9 +1,0 @@
-main: me.sabrewolf.skyservers.pixelmon.Main
-name: ExpToGive
-author: _SaBrEWoLf, pvmac2194
-version: 0.1
-depend: [Essentials]
-commands:
-    autoexp:
-        description: /autoexp <Command>
-        usage: /autoexp

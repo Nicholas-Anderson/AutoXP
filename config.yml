@@ -1,0 +1,11 @@
+#Time in seconds
+timeInSeconds: 10
+
+#Exp will be changed at this value (more values below to control)
+minExpPoints: 150
+
+#Players will get a certain amount of experience if they are under minExpPoints
+expGivenForUnderMin: 3
+
+#Players will get a certain amount of experience if they are above minExpPoints
+expGivenForAboveMin: 1
