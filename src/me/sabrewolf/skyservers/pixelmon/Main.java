@@ -71,18 +71,14 @@ public class Main extends JavaPlugin implements Listener
 					{
 						if (args.length == 0)
 							{
-								sender
-										.sendMessage("§b=-----------------+  §9 AutoExp §b  +-----------------=");
-								sender.sendMessage("§b= §3Available commands§f:");
+								sender.sendMessage("ï¿½b=-----------------+  ï¿½9 AutoExp ï¿½b  +-----------------=");
+								sender.sendMessage("ï¿½b= ï¿½3Available commandsï¿½f:");
 								if (sender.hasPermission("autoexp.reload"))
-									sender
-											.sendMessage("§b=  §5  - §a /autoexp §creload  §f-§e  Reloads the configration.");
+									sender.sendMessage("ï¿½b=  ï¿½5  - ï¿½a /autoexp ï¿½creload  ï¿½f-ï¿½e  Reloads the configration.");
 								if (sender.hasPermission("autoexp.setval"))
-									sender
-											.sendMessage("§b=  §5  - §a /autoexp §csetval (val) (amount) §f-§e  Sets a value in the config.");
+									sender.sendMessage("ï¿½b=  ï¿½5  - ï¿½a /autoexp ï¿½csetval (val) (amount) ï¿½f-ï¿½e  Sets a value in the config.");
 								if (sender.hasPermission("autoexp.setval"))
-									sender
-											.sendMessage("§b=---------------------------------------------------=");
+									sender.sendMessage("ï¿½b=---------------------------------------------------=");
 								return true;
 							}
 					}
@@ -110,9 +106,7 @@ public class Main extends JavaPlugin implements Listener
 								{
 									if (args.length == 1 || args.length == 2)
 										{
-											sender
-													.sendMessage(ChatColor.RED
-															+ "Usage: /autoexp setval (expGivenForAboveMin / expGivenForUnderMin / minExpPoints / timeInSeconds) (value)");
+											sender.sendMessage(ChatColor.RED + "Usage: /autoexp setval (expGivenForAboveMin / expGivenForUnderMin / minExpPoints / timeInSeconds) (value)");
 										}
 									else
 										if (args.length > 1)
