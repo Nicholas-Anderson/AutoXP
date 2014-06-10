@@ -99,8 +99,8 @@ public class Main extends JavaPlugin implements Listener
 						Bukkit.getPluginManager().enablePlugin(this);
 						return true;
 					}
-				else
-					if (args[0].equalsIgnoreCase("setval"))
+					//setval command
+				else if (args[0].equalsIgnoreCase("setval"))
 						{
 							if (sender.hasPermission("autoexp.setval"))
 								{
