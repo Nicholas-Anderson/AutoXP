@@ -96,38 +96,15 @@ public class Main extends JavaPlugin implements Listener {
 				if (args.length == 1 || args.length == 2) {
 					sender.sendMessage(ChatColor.RED
 							+ "Usage: /autoexp setval "
-							+ ChatColor.RED
+							+ ChatColor.YELLOW
 							+ "(expGivenForAboveMin / expGivenForUnderMin / minExpPoints / timeInSeconds) (value)");
-				} else if (args.length > 1) {
-
-					float num = Float.parseFloat(args[2]);
-					this.getConfig().set(args[1], num);
-					this.saveConfig();
-					this.reloadConfig();
-					sender.sendMessage(ChatColor.GREEN
-							+ "Configuration value \"" + args[1]
-							+ "\" set to \"" + args[2] + "\"");
-					Bukkit.getPluginManager().disablePlugin(this);
-					Bukkit.getPluginManager().enablePlugin(this);
-					this.reloadConfig();
-					sender.sendMessage(ChatColor.GREEN
-							+ "Configuration has been Reloaded!");
-					Bukkit.getPluginManager().disablePlugin(this);
-					Bukkit.getPluginManager().enablePlugin(this);
 					return true;
-				}
-				sender.sendMessage(ChatColor.RED
-						+ "You're not allowed to use that!");
-				return true;
-			}
-			// setval command
-			else if (args[0].equalsIgnoreCase("setval")) {
-				if (sender.hasPermission("autoexp.setval")) {
-					if (args.length == 1 || args.length == 2) {
-						sender.sendMessage(ChatColor.RED
-								+ "Usage: /autoexp setval (expGivenForAboveMin / expGivenForUnderMin / minExpPoints / timeInSeconds) (value)");
-					} else if (args.length > 1) {
-						int num = Integer.parseInt(args[2]);
+				} else if (args.length > 1) {
+					if ((args[1] == "expGivenForAboveMin")
+							|| (args[1] == "expGivenForUnderMin")
+							|| (args[1] == "minExpPoints")
+							|| (args[1] == "timeInSeconds")) {
+						float num = Float.parseFloat(args[2]);
 						this.getConfig().set(args[1], num);
 						this.saveConfig();
 						this.reloadConfig();
@@ -136,10 +113,43 @@ public class Main extends JavaPlugin implements Listener {
 								+ "\" set to \"" + args[2] + "\"");
 						Bukkit.getPluginManager().disablePlugin(this);
 						Bukkit.getPluginManager().enablePlugin(this);
+						this.reloadConfig();
+						sender.sendMessage(ChatColor.GREEN
+								+ "Configuration has been Reloaded!");
+						return true;
+					} else {
+						sender.sendMessage(ChatColor.RED
+								+ "Please make sure you are using "
+								+ ChatColor.YELLOW
+								+ " (expGivenForAboveMin / expGivenForUnderMin / minExpPoints / timeInSeconds)");
+						return true;
 					}
 				}
+
+			} else {
+				sender.sendMessage(ChatColor.RED
+						+ "You're not allowed to use that!");
 				return true;
 			}
+			// setval command
+			// Doubled out... might be useful in the future.
+			/*
+			 * else if (args[0].equalsIgnoreCase("setval")) { if
+			 * (sender.hasPermission("autoexp.setval")) { if (args.length == 1
+			 * || args.length == 2) { sender.sendMessage(ChatColor.RED +
+			 * "Usage: /autoexp setval (expGivenForAboveMin / expGivenForUnderMin / minExpPoints / timeInSeconds) (value)"
+			 * ); } else if ((args.length > 1)) { System.out.println("Yolo  " +
+			 * args[1]); if ((args[1] == "expGivenForAboveMin")){ float num =
+			 * Float.parseFloat(args[2]); this.getConfig().set(args[1], num);
+			 * this.saveConfig(); this.reloadConfig();
+			 * sender.sendMessage(ChatColor.GREEN + "Configuration value \"" +
+			 * args[1] + "\" set to \"" + args[2] + "\"");
+			 * Bukkit.getPluginManager().disablePlugin(this);
+			 * Bukkit.getPluginManager().enablePlugin(this); } }else{
+			 * sender.sendMessage("Yolo swag you dont have it"); }
+			 * 
+			 * } return true; }
+			 */
 			return false;
 
 		}
