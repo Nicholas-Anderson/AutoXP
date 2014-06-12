@@ -40,7 +40,14 @@ public class Main extends JavaPlugin implements Listener {
 			float CurrentExp = p.getTotalExperience();
 			if (ess.getUser(p).isJailed() != true) {
 				if (ess.getUser(p).isAfk() != true) {
-					if (CurrentExp < getConfig().getInt("minExpPoints")) {
+					if (p.hasPermission(("autoexp.donor"))) {
+						if (CurrentExp < getConfig().getInt("minExpPoints")) {
+							p.giveExp(getConfig().getInt("expGivenForUnderMin") * getConfig().getInt("donorMultiplier"));
+						} else {
+							p.giveExp(getConfig().getInt("expGivenForAboveMin"));
+
+						}
+					} else if (CurrentExp < getConfig().getInt("minExpPoints")) {
 						p.giveExp(getConfig().getInt("expGivenForUnderMin"));
 					} else {
 						p.giveExp(getConfig().getInt("expGivenForAboveMin"));

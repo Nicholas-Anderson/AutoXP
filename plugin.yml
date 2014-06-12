@@ -12,3 +12,5 @@ permissions:
     description: Allows the admin to reload the configuration.
   autoexp.setval:
     description: Allows the admin to set AutoExp's variables.
+  autoexp.donor:
+    description: Donator multiplier in config.yml
