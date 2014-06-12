@@ -1,8 +1,5 @@
 package me.sabrewolf.skyservers.pixelmon;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -15,9 +12,6 @@ import com.earth2me.essentials.Essentials;
 public class Main extends JavaPlugin implements Listener
 	{
 		Essentials ess = (Essentials) Bukkit.getServer().getPluginManager().getPlugin("Essentials");
-
-		@SuppressWarnings("unused")
-		private List<String> expFlyers = new ArrayList<String>();
 
 		@Override
 		public void onEnable()
@@ -115,7 +109,7 @@ public class Main extends JavaPlugin implements Listener
 								sender.sendMessage(ChatColor.AQUA + "=---------------------------------------------------=");
 								return true;
 							}
-					}
+					
 				// Reload command
 				if (args[0].equalsIgnoreCase("reload"))
 					{
@@ -168,7 +162,8 @@ public class Main extends JavaPlugin implements Listener
 						sender.sendMessage(ChatColor.RED + "You're not allowed to use that!");
 						return true;
 					}
-				return false;
 
+			}
+				return false;
 			}
 	}
