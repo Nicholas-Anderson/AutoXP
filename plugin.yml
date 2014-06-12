@@ -6,6 +6,7 @@ depend: [Essentials]
 commands:
     autoexp:
         description: /autoexp <Command>
+        aliases: [ae]
         usage: /autoexp
 permissions:
   autoexp.reload:

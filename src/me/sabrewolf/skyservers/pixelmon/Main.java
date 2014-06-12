@@ -1,5 +1,8 @@
 package me.sabrewolf.skyservers.pixelmon;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -12,6 +15,9 @@ import com.earth2me.essentials.Essentials;
 public class Main extends JavaPlugin implements Listener
 	{
 		Essentials ess = (Essentials) Bukkit.getServer().getPluginManager().getPlugin("Essentials");
+
+		@SuppressWarnings("unused")
+		private List<String> expFlyers = new ArrayList<String>();
 
 		@Override
 		public void onEnable()
@@ -43,38 +49,36 @@ public class Main extends JavaPlugin implements Listener
 				for (Player p : Bukkit.getOnlinePlayers())
 					{
 						float CurrentExp = p.getTotalExperience();
-						if (ess.getUser(p).isJailed() != true)
+
+						if (!(ess.getUser(p).isJailed() == true))
 							{
-								if (ess.getUser(p).isAfk() != true)
+								if (!(ess.getUser(p).isAfk() == true))
 									{
-										if (!(ess.getUser(p).getAllowFlight() == true))
+										if (p.hasPermission(("autoexp.donor")))
 											{
-												if (p.hasPermission(("autoexp.donor")))
+												if (CurrentExp < getConfig().getInt("minExpPoints"))
 													{
-														if (CurrentExp < getConfig().getInt("minExpPoints"))
-															{
 
-																p.giveExp(getConfig().getInt("expGivenForUnderMin") * getConfig().getInt("donorMultiplier"));
-															}
-														else
-															{
-																p.giveExp(getConfig().getInt("expGivenForAboveMin"));
-
-															}
+														p.giveExp(getConfig().getInt("expGivenForUnderMin") * getConfig().getInt("donorMultiplier"));
 													}
 												else
-													if (CurrentExp < getConfig().getInt("minExpPoints"))
-														{
-															p.giveExp(getConfig().getInt("expGivenForUnderMin"));
-														}
-													else
-														{
-															p.giveExp(getConfig().getInt("expGivenForAboveMin"));
-														}
+													{
+														p.giveExp(getConfig().getInt("expGivenForAboveMin"));
+
+													}
+											}
+										else if (CurrentExp < getConfig().getInt("minExpPoints"))
+											{
+												p.giveExp(getConfig().getInt("expGivenForUnderMin"));
+											}
+										else
+											{
+												p.giveExp(getConfig().getInt("expGivenForAboveMin"));
 											}
 									}
 							}
 					}
+
 			}
 
 		public void changeConfig(String[] args, CommandSender sender)
@@ -127,45 +131,43 @@ public class Main extends JavaPlugin implements Listener
 						return true;
 					}
 				// setval command
-				else
-					if (args[0].equalsIgnoreCase("setval"))
-						{
-							if (sender.hasPermission("autoexp.setval"))
-								{
-									if (args.length == 1 || args.length == 2)
-										{
-											sender.sendMessage(ChatColor.RED + "Usage: /autoexp setval " + ChatColor.YELLOW
-													+ "(expGivenForAboveMin / expGivenForUnderMin / minExpPoints / timeInSeconds) (value)");
-											return true;
-										}
-									else
-										if (args.length > 1)
+				else if (args[0].equalsIgnoreCase("setval"))
+					{
+						if (sender.hasPermission("autoexp.setval"))
+							{
+								if (args.length == 1 || args.length == 2)
+									{
+										sender.sendMessage(ChatColor.RED + "Usage: /autoexp setval " + ChatColor.YELLOW
+												+ "(expGivenForAboveMin / expGivenForUnderMin / minExpPoints / timeInSeconds) (value)");
+										return true;
+									}
+								else if (args.length > 1)
+									{
+										if ((args[1].equals("expGivenForAboveMin")) || ((args[1].equals("expGivenForUnderMin"))) || ((args[1].equals("minExpPoints")))
+												|| ((args[1].equals("timeInSeconds"))))
 											{
-												if ((args[1].equals("expGivenForAboveMin")) || ((args[1].equals("expGivenForUnderMin")))
-														|| ((args[1].equals("minExpPoints"))) || ((args[1].equals("timeInSeconds"))))
-													{
-														changeConfig(args, sender);
-														return true;
-
-													}
-												else
-													{
-
-														sender.sendMessage(ChatColor.RED + "Please make sure you are using " + ChatColor.YELLOW
-																+ " (expGivenForAboveMin / expGivenForUnderMin / minExpPoints / timeInSeconds)");
-														return true;
-
-													}
+												changeConfig(args, sender);
+												return true;
 
 											}
-								}
+										else
+											{
 
-						}
-					else
-						{
-							sender.sendMessage(ChatColor.RED + "You're not allowed to use that!");
-							return true;
-						}
+												sender.sendMessage(ChatColor.RED + "Please make sure you are using " + ChatColor.YELLOW
+														+ " (expGivenForAboveMin / expGivenForUnderMin / minExpPoints / timeInSeconds)");
+												return true;
+
+											}
+
+									}
+							}
+
+					}
+				else
+					{
+						sender.sendMessage(ChatColor.RED + "You're not allowed to use that!");
+						return true;
+					}
 				return false;
 
 			}

@@ -1,19 +1,20 @@
 #Time in seconds, this can go into a float (0.1, etc.)
-#Default 10
+#Default: 10
 timeInSeconds: 10
 
 #Exp will be changed at this value (more values below to control)
-#Default 150
+#Default: 150
 minExpPoints: 150
 
 #Players will get a certain amount of experience if they are under minExpPoints
-#Default 3
+#Default: 3
 expGivenForUnderMin: 3
 
 #Players will get a certain amount of experience if they are above minExpPoints
-#Default 1
+#Default: 1
 expGivenForAboveMin: 1
 
-#Donator permission autoexp.donor multiplier
-#Default 2
+#Donator permission autoexp.donor multiplier. Ensure this is an INTEGER (1, 2, 3, etc.) otherwise
+#It'll break. 
+#Default: 2
 donorMultiplier: 2
