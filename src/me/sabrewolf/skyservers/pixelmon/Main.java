@@ -83,7 +83,6 @@ public class Main extends JavaPlugin implements Listener
 				sender.sendMessage(ChatColor.GREEN + "Configuration value \"" + args[1] + "\" set to \"" + args[2] + "\"");
 				this.getServer().getScheduler().cancelTasks(this);
 				initializeExpGiving();
-				this.reloadConfig();
 				sender.sendMessage(ChatColor.GREEN + "Configuration has been Reloaded!");
 			}
 
