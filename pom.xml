@@ -28,4 +28,20 @@
     </plugins>
   </build>
   <url>http://dev.bukkit.org/bukkit-plugins/auto-exp/</url>
+  <dependencies>
+  	<dependency>
+  		<groupId>com.earth2me</groupId>
+  		<artifactId>Essentials</artifactId>
+  		<version>2.13.1</version>
+  		<scope>system</scope>
+  		<systemPath>${project.basedir}\lib\Essentials.jar</systemPath>
+  	</dependency>
+  	<dependency>
+  		<groupId>org.bukkit</groupId>
+  		<artifactId>bukkit</artifactId>
+  		<version>1.7.9-R0.2</version>
+  		<scope>system</scope>
+  		<systemPath>${project.basedir}/lib/bukkit-1.7.9-R0.2.jar</systemPath>
+  	</dependency>
+  </dependencies>
 </project>
