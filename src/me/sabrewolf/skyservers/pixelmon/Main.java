@@ -12,7 +12,6 @@ import com.earth2me.essentials.Essentials;
 public class Main extends JavaPlugin implements Listener
 	{
 		Essentials ess = (Essentials) Bukkit.getServer().getPluginManager().getPlugin("Essentials");
-
 		@Override
 		public void onEnable()
 			{
@@ -82,8 +81,8 @@ public class Main extends JavaPlugin implements Listener
 				this.saveConfig();
 				this.reloadConfig();
 				sender.sendMessage(ChatColor.GREEN + "Configuration value \"" + args[1] + "\" set to \"" + args[2] + "\"");
-				Bukkit.getPluginManager().disablePlugin(this);
-				Bukkit.getPluginManager().enablePlugin(this);
+				this.getServer().getScheduler().cancelTasks(this);
+				initializeExpGiving();
 				this.reloadConfig();
 				sender.sendMessage(ChatColor.GREEN + "Configuration has been Reloaded!");
 			}
@@ -109,61 +108,61 @@ public class Main extends JavaPlugin implements Listener
 								sender.sendMessage(ChatColor.AQUA + "=---------------------------------------------------=");
 								return true;
 							}
-					
-				// Reload command
-				if (args[0].equalsIgnoreCase("reload"))
-					{
-						if (sender.hasPermission("autoexp.reload"))
+
+						// Reload command
+						if (args[0].equalsIgnoreCase("reload"))
 							{
-								this.reloadConfig();
-								sender.sendMessage(ChatColor.GREEN + "Configuration has been Reloaded!");
-								Bukkit.getPluginManager().disablePlugin(this);
-								Bukkit.getPluginManager().enablePlugin(this);
-								return true;
-							}
-						sender.sendMessage(ChatColor.RED + "You're not allowed to use that!");
-						return true;
-					}
-				// setval command
-				else if (args[0].equalsIgnoreCase("setval"))
-					{
-						if (sender.hasPermission("autoexp.setval"))
-							{
-								if (args.length == 1 || args.length == 2)
+								if (sender.hasPermission("autoexp.reload"))
 									{
-										sender.sendMessage(ChatColor.RED + "Usage: /autoexp setval " + ChatColor.YELLOW
-												+ "(expGivenForAboveMin / expGivenForUnderMin / minExpPoints / timeInSeconds) (value)");
+										this.reloadConfig();
+										sender.sendMessage(ChatColor.GREEN + "Configuration has been Reloaded!");
+										this.getServer().getScheduler().cancelTasks(this);
+										initializeExpGiving();
 										return true;
 									}
-								else if (args.length > 1)
+								sender.sendMessage(ChatColor.RED + "You're not allowed to use that!");
+								return true;
+							}
+						// setval command
+						else if (args[0].equalsIgnoreCase("setval"))
+							{
+								if (sender.hasPermission("autoexp.setval"))
 									{
-										if ((args[1].equals("expGivenForAboveMin")) || ((args[1].equals("expGivenForUnderMin"))) || ((args[1].equals("minExpPoints")))
-												|| ((args[1].equals("timeInSeconds"))))
+										if (args.length == 1 || args.length == 2)
 											{
-												changeConfig(args, sender);
+												sender.sendMessage(ChatColor.RED + "Usage: /autoexp setval " + ChatColor.YELLOW
+														+ "(expGivenForAboveMin / expGivenForUnderMin / minExpPoints / timeInSeconds) (value)");
 												return true;
+											}
+										else if (args.length > 1)
+											{
+												if ((args[1].equals("expGivenForAboveMin")) || ((args[1].equals("expGivenForUnderMin")))
+														|| ((args[1].equals("minExpPoints"))) || ((args[1].equals("timeInSeconds"))))
+													{
+														changeConfig(args, sender);
+														return true;
+
+													}
+												else
+													{
+
+														sender.sendMessage(ChatColor.RED + "Please make sure you are using " + ChatColor.YELLOW
+																+ " (expGivenForAboveMin / expGivenForUnderMin / minExpPoints / timeInSeconds)");
+														return true;
+
+													}
 
 											}
-										else
-											{
-
-												sender.sendMessage(ChatColor.RED + "Please make sure you are using " + ChatColor.YELLOW
-														+ " (expGivenForAboveMin / expGivenForUnderMin / minExpPoints / timeInSeconds)");
-												return true;
-
-											}
-
 									}
+
+							}
+						else
+							{
+								sender.sendMessage(ChatColor.RED + "You're not allowed to use that!");
+								return true;
 							}
 
 					}
-				else
-					{
-						sender.sendMessage(ChatColor.RED + "You're not allowed to use that!");
-						return true;
-					}
-
-			}
 				return false;
 			}
 	}
