@@ -2,7 +2,7 @@ main: me.sabrewolf.skyservers.pixelmon.Main
 name: AutoExp
 author: _SaBrEWoLf, pvmac2194
 website: http://dev.bukkit.org/bukkit-plugins/auto-exp/
-version: 0.1
+version: 1.0
 depend: [Essentials]
 commands:
     autoexp:
