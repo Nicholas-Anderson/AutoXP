@@ -1,0 +1,22 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>me.captainbern</groupId>
+    <artifactId>AnimationLib</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+    <dependencies>
+		<dependency>
+			<groupId>org.bukkit</groupId>
+			<artifactId>bukkit</artifactId>
+			<version>1.7.9-R0.2</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/../lib/bukkit-1.7.9-R0.2.jar</systemPath>
+		</dependency>
+    <dependency>
+      <groupid>Essentials</groupid>
+      <artifactId>Essentials</artifactId>
+      <version>2.13.1</version>
+      <scope>system</scope>
+      <systemPath>${project.basedir}/../lib/Essentials.jar</systemPath>
+    </dependencies>
+</project>
