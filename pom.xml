@@ -4,19 +4,26 @@
     <artifactId>AutoEXP</artifactId>
     <version>1.0</version>
     <packaging>jar</packaging>
+    <repositories>
+    	<repository>
+    	<releases>
+    	</releases>
+    	<snapshots>
+    	</snapshots>
+    	<id>bukkit-repo</id>
+    	<url>http://repo.bukkit.org/content/groups/public/</url>
     <dependencies>
 		<dependency>
 			<groupId>org.bukkit</groupId>
 			<artifactId>bukkit</artifactId>
 			<version>1.7.9-R0.2</version>
 			<scope>system</scope>
-			<systemPath>${project.basedir}/../lib/bukkit-1.7.9-R0.2.jar</systemPath>
 		</dependency>
     <dependency>
-      <groupid>Essentials</groupid>
+      <groupId>com.earth2me</groupId>
       <artifactId>Essentials</artifactId>
       <version>2.13.1</version>
       <scope>system</scope>
-      <systemPath>${project.basedir}/../lib/Essentials.jar</systemPath>
+      <systemPath>${project.basedir}/lib/Essentials.jar</systemPath>
     </dependencies>
 </project>
