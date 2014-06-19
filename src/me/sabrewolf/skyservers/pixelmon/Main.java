@@ -131,13 +131,13 @@ public class Main extends JavaPlugin implements Listener
 										if (args.length == 1 || args.length == 2)
 											{
 												sender.sendMessage(ChatColor.RED + "Usage: /autoexp setval " + ChatColor.YELLOW
-														+ "(expGivenForAboveMin / expGivenForUnderMin / minExpPoints / timeInSeconds) (value)");
+														+ "(expGivenForAboveMin / expGivenForUnderMin / minExpPoints / timeInSeconds / donorMultiplier) (value)");
 												return true;
 											}
 										else if (args.length > 1)
 											{
 												if ((args[1].equals("expGivenForAboveMin")) || ((args[1].equals("expGivenForUnderMin")))
-														|| ((args[1].equals("minExpPoints"))) || ((args[1].equals("timeInSeconds"))))
+														|| ((args[1].equals("minExpPoints"))) || ((args[1].equals("timeInSeconds")) ||((args[1].equals("donorMultiplier")))))
 													{
 														changeConfig(args, sender);
 														return true;
@@ -147,7 +147,7 @@ public class Main extends JavaPlugin implements Listener
 													{
 
 														sender.sendMessage(ChatColor.RED + "Please make sure you are using " + ChatColor.YELLOW
-																+ " (expGivenForAboveMin / expGivenForUnderMin / minExpPoints / timeInSeconds)");
+																+ " (expGivenForAboveMin / expGivenForUnderMin / minExpPoints / timeInSeconds / donorMultiplier)");
 														return true;
 
 													}
