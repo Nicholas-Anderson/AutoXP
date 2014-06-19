@@ -2,10 +2,8 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>ExpToGive</groupId>
   <artifactId>ExpToGive</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>1.0</version>
   <name>AutoExp</name>
-  <description>YoroSwagWorks
-</description>
   <build>
     <sourceDirectory>src</sourceDirectory>
     <resources>
@@ -44,4 +42,8 @@
   		<systemPath>${project.basedir}/lib/bukkit-1.7.9-R0.2.jar</systemPath>
   	</dependency>
   </dependencies>
+  <description>Auto Experience POM</description>
+  <ciManagement>
+  	<system>Jenkins</system>
+  </ciManagement>
 </project>

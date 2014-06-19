@@ -147,7 +147,7 @@ public class Main extends JavaPlugin implements Listener
 													{
 
 														sender.sendMessage(ChatColor.RED + "Please make sure you are using " + ChatColor.YELLOW
-																+ " (expGivenForAboveMin / expGivenForUnderMin / minExpPoints / timeInSeconds / donorMultiplier)");
+																+ " (expGivenForAbovseMin / expGivenForUnderMin / minExpPoints / timeInSeconds / donorMultiplier)");
 														return true;
 
 													}
