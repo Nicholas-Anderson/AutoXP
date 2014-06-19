@@ -12,6 +12,7 @@ import com.earth2me.essentials.Essentials;
 public class Main extends JavaPlugin implements Listener
 	{
 		Essentials ess = (Essentials) Bukkit.getServer().getPluginManager().getPlugin("Essentials");
+
 		@Override
 		public void onEnable()
 			{
