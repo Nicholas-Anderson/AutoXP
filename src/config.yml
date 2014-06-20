@@ -18,3 +18,7 @@ expGivenForAboveMin: 1
 #It'll break. 
 #Default: 2
 donorMultiplier: 2
+
+#Do you want permissions to allow the receiving of EXP?
+#Permission is autoexp.receiveExp
+useReceiveExpPermission: false

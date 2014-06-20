@@ -16,3 +16,5 @@ permissions:
     description: Allows the admin to set AutoExp's variables.
   autoexp.donor:
     description: Donator multiplier in config.yml
+  autoexp.receiveExp:
+    description: Allows the player to actually receive EXP. 

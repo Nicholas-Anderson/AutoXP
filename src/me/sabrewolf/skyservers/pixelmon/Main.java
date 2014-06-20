@@ -37,33 +37,34 @@ public class Main extends JavaPlugin implements Listener
 
 			}
 
-		// Initialise giving their Exp
-		public void giveXp()
+		// This actually gives their exp..
+		// The pro method
+		public void actualGiveExp(Player p, Float CurrentExp)
 			{
-				for (Player p : Bukkit.getOnlinePlayers())
+				if (!(ess.getUser(p).isJailed() == true))
 					{
-						float CurrentExp = p.getTotalExperience();
-
-						if (!(ess.getUser(p).isJailed() == true))
+						if (!(ess.getUser(p).isAfk() == true))
 							{
-								if (!(ess.getUser(p).isAfk() == true))
+								if (p.hasPermission(("autoexp.donor")))
 									{
-										if (p.hasPermission(("autoexp.donor")))
+										if (CurrentExp < getConfig().getInt("minExpPoints"))
 											{
-												if (CurrentExp < getConfig().getInt("minExpPoints"))
-													{
-
-														p.giveExp(getConfig().getInt("expGivenForUnderMin") * getConfig().getInt("donorMultiplier"));
-													}
-												else
-													{
-														p.giveExp(getConfig().getInt("expGivenForAboveMin"));
-
-													}
+												int totalGiven = getConfig().getInt("expGivenForUnderMin") * getConfig().getInt("donorMultiplier");
+												p.giveExp(totalGiven);
 											}
-										else if (CurrentExp < getConfig().getInt("minExpPoints"))
+										else
+											{
+												int totalGiven2 = getConfig().getInt("expGivenForAboveMin") * getConfig().getInt("donorMultiplier");
+												p.giveExp(totalGiven2);
+
+											}
+									}
+								else
+									{
+										if (CurrentExp < getConfig().getInt("minExpPoints"))
 											{
 												p.giveExp(getConfig().getInt("expGivenForUnderMin"));
+
 											}
 										else
 											{
@@ -72,7 +73,26 @@ public class Main extends JavaPlugin implements Listener
 									}
 							}
 					}
+			}
 
+		// Initialise giving their Exp
+		public void giveXp()
+			{
+				for (Player p : Bukkit.getOnlinePlayers())
+					{
+						float CurrentExp = p.getTotalExperience();
+						if (getConfig().getBoolean("useReceiveExpPermission") == true)
+							{
+								if (p.hasPermission("autoexp.receiveExp"))
+									{
+										actualGiveExp(p, CurrentExp);
+									}
+							}
+						else
+							{
+								actualGiveExp(p, CurrentExp);
+							}
+					}
 			}
 
 		public void changeConfig(String[] args, CommandSender sender)
@@ -137,7 +157,7 @@ public class Main extends JavaPlugin implements Listener
 										else if (args.length > 1)
 											{
 												if ((args[1].equals("expGivenForAboveMin")) || ((args[1].equals("expGivenForUnderMin")))
-														|| ((args[1].equals("minExpPoints"))) || ((args[1].equals("timeInSeconds")) ||((args[1].equals("donorMultiplier")))))
+														|| ((args[1].equals("minExpPoints"))) || ((args[1].equals("timeInSeconds")) || ((args[1].equals("donorMultiplier")))))
 													{
 														changeConfig(args, sender);
 														return true;
