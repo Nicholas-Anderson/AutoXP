@@ -74,7 +74,7 @@ public class Main extends JavaPlugin implements Listener
 							}
 					}
 			}
-
+//This isn't the actual giveXP Event
 		// Initialise giving their Exp
 		public void giveXp()
 			{
