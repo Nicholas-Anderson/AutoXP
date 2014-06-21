@@ -213,3 +213,11 @@ pip-log.txt
 
 #Mr Developer
 .mr.developer.cfg
+*.jar
+target/classes/config.yml
+target/classes/me/sabrewolf/skyservers/pixelmon/Main$1.class
+target/classes/me/sabrewolf/skyservers/pixelmon/Main.class
+target/classes/plugin.yml
+target/maven-archiver/pom.properties
+target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst
+target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst
