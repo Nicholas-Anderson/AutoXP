@@ -17,8 +17,7 @@ public class Main extends JavaPlugin implements Listener
 		public void onEnable()
 			{
 				Bukkit.getPluginManager().registerEvents(this, this);
-				getConfig().options().copyDefaults(true);
-				saveConfig();
+				saveDefaultConfig();
 
 				initializeExpGiving();
 			}
