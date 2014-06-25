@@ -2,7 +2,7 @@ main: me.sabrewolf.skyservers.Main
 name: AutoExp
 author: _SaBrEWoLf, pvmac2194
 website: http://dev.bukkit.org/bukkit-plugins/auto-exp/
-version: 1.2
+version: 1.3
 depend: [Essentials]
 commands:
     autoexp:
