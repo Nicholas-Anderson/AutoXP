@@ -82,7 +82,7 @@ public class Main extends JavaPlugin implements Listener
 						float CurrentExp = p.getTotalExperience();
 						if (getConfig().getBoolean("useReceiveExpPermission") == true)
 							{
-								if (p.hasPermission("autoexp.receiveExp"))
+								if (p.hasPermission("autoexp.receiveexp"))
 									{
 										actualGiveExp(p, CurrentExp);
 									}
