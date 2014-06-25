@@ -73,7 +73,8 @@ public class Main extends JavaPlugin implements Listener
 							}
 					}
 			}
-//This isn't the actual giveXP Event
+
+		// This isn't the actual giveXP Event
 		// Initialise giving their Exp
 		public void giveXp()
 			{
@@ -155,8 +156,10 @@ public class Main extends JavaPlugin implements Listener
 											}
 										else if (args.length > 1)
 											{
-												if ((args[1].equals("expGivenForAboveMin")) || ((args[1].equals("expGivenForUnderMin")))
-														|| ((args[1].equals("minExpPoints"))) || ((args[1].equals("timeInSeconds")) || ((args[1].equals("donorMultiplier")))))
+												if ((args[1].equals("expGivenForAboveMin"))
+														|| ((args[1].equals("expGivenForUnderMin")))
+														|| ((args[1].equals("minExpPoints")))
+														|| ((args[1].equals("timeInSeconds")) || ((args[1].equals("donorMultiplier")))))
 													{
 														changeConfig(args, sender);
 														return true;
@@ -166,7 +169,7 @@ public class Main extends JavaPlugin implements Listener
 													{
 
 														sender.sendMessage(ChatColor.RED + "Please make sure you are using " + ChatColor.YELLOW
-																+ " (expGivenForAbovseMin / expGivenForUnderMin / minExpPoints / timeInSeconds / donorMultiplier)");
+																+ " (expGivenForAboveMin / expGivenForUnderMin / minExpPoints / timeInSeconds / donorMultiplier)");
 														return true;
 
 													}
