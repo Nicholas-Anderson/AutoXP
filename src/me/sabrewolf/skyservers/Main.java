@@ -1,4 +1,4 @@
-package me.sabrewolf.skyservers.pixelmon;
+package me.sabrewolf.skyservers;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
