@@ -7,6 +7,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
+
 import com.earth2me.essentials.Essentials;
 
 public class Main extends JavaPlugin implements Listener
@@ -20,6 +21,7 @@ public class Main extends JavaPlugin implements Listener
 				saveDefaultConfig();
 
 				initializeExpGiving();
+
 			}
 
 		public void initializeExpGiving()
@@ -239,8 +241,11 @@ public class Main extends JavaPlugin implements Listener
 														return true;
 
 													}
-												sender.sendMessage(ChatColor.RED + "Please make sure you are using " + ChatColor.YELLOW
-														+ " (expGivenForAboveMin / expGivenForUnderMin / minExpPoints / timeInSeconds / donorMultiplier / enableMultiplier / multiplierValue)");
+												sender
+														.sendMessage(ChatColor.RED
+																+ "Please make sure you are using "
+																+ ChatColor.YELLOW
+																+ " (expGivenForAboveMin / expGivenForUnderMin / minExpPoints / timeInSeconds / donorMultiplier / enableMultiplier / multiplierValue)");
 												return true;
 
 											}
