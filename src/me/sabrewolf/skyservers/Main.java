@@ -152,19 +152,30 @@ public class Main extends JavaPlugin implements Listener
 
 		public void changeConfig(String[] args, CommandSender sender)
 			{
-				float num = Float.parseFloat(args[2]);
-				this.getConfig().set(args[1], num);
-				this.saveConfig();
-				this.reloadConfig();
-				sender.sendMessage(ChatColor.GREEN + "Configuration value \"" + args[1] + "\" set to \"" + args[2] + "\"");
-				this.getServer().getScheduler().cancelTasks(this);
-				initializeExpGiving();
-				sender.sendMessage(ChatColor.GREEN + "Configuration has been Reloaded!");
+				try
+					{
+						float num = Float.parseFloat(args[2]);
+						this.getConfig().set(args[1], num);
+						this.saveConfig();
+						this.reloadConfig();
+						sender.sendMessage(ChatColor.GREEN + "Configuration value \"" + args[1] + "\" set to \"" + args[2] + "\"");
+						this.getServer().getScheduler().cancelTasks(this);
+						initializeExpGiving();
+						sender.sendMessage(ChatColor.GREEN + "Configuration has been Reloaded!");
+					}
+				catch (Exception e)
+					{
+						sender.sendMessage("Invalid input. Requires numbers.");
+					}
 			}
 
 		public void changeBoolean(String[] args, CommandSender sender)
 			{
-				try
+				if (!(args[2].equals("true") || (!(args[2].equals("false")))))
+					{
+						sender.sendMessage("This has to be true or false.");
+					}
+				else
 					{
 						boolean submission = Boolean.parseBoolean(args[2]);
 						this.getConfig().set(args[1], submission);
@@ -175,11 +186,7 @@ public class Main extends JavaPlugin implements Listener
 						initializeExpGiving();
 						sender.sendMessage(ChatColor.GREEN + "Configuration has been Reloaded!");
 					}
-				catch (Exception e)
-					{
-						sender.sendMessage(ChatColor.RED + "This only accepts true/false");
 
-					}
 			}
 
 		// Commands
