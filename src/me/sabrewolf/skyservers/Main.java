@@ -164,14 +164,22 @@ public class Main extends JavaPlugin implements Listener
 
 		public void changeBoolean(String[] args, CommandSender sender)
 			{
-				boolean submission = Boolean.parseBoolean(args[2]);
-				this.getConfig().set(args[1], submission);
-				this.saveConfig();
-				this.reloadConfig();
-				sender.sendMessage(ChatColor.GREEN + "Configuration value \"" + args[1] + "\" set to \"" + args[2] + "\"");
-				this.getServer().getScheduler().cancelTasks(this);
-				initializeExpGiving();
-				sender.sendMessage(ChatColor.GREEN + "Configuration has been Reloaded!");
+				try
+					{
+						boolean submission = Boolean.parseBoolean(args[2]);
+						this.getConfig().set(args[1], submission);
+						this.saveConfig();
+						this.reloadConfig();
+						sender.sendMessage(ChatColor.GREEN + "Configuration value \"" + args[1] + "\" set to \"" + args[2] + "\"");
+						this.getServer().getScheduler().cancelTasks(this);
+						initializeExpGiving();
+						sender.sendMessage(ChatColor.GREEN + "Configuration has been Reloaded!");
+					}
+				catch (Exception e)
+					{
+						sender.sendMessage(ChatColor.RED + "This only accepts true/false");
+
+					}
 			}
 
 		// Commands
