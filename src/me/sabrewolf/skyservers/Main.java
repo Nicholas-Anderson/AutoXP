@@ -24,15 +24,21 @@ public class Main extends JavaPlugin implements Listener
 
 		public void initializeExpGiving()
 			{
-				getServer().getScheduler().scheduleSyncRepeatingTask(this, new Runnable()
+				if (!(Bukkit.getOnlinePlayers().length == 0))
 					{
-						public void run()
+						getServer().getScheduler().scheduleSyncRepeatingTask(this, new Runnable()
 							{
-								giveXp();
-							}
-					}, 0, (getConfig().getInt("timeInSeconds") * 20)); // this is in
-				// seconds
-				// converted
+								public void run()
+									{
+										giveXp();
+									}
+							}, 0, (getConfig().getInt("timeInSeconds") * 20)); // this is in
+																																	// seconds.
+					}
+				else
+					{
+						// nothing
+					}
 
 			}
 
@@ -40,37 +46,83 @@ public class Main extends JavaPlugin implements Listener
 		// The pro method
 		public void actualGiveExp(Player p, Float CurrentExp)
 			{
-				if (!(ess.getUser(p).isJailed() == true))
+				if (getConfig().getBoolean("enableMultiplier") == true)
 					{
-						if (!(ess.getUser(p).isAfk() == true))
+						if (!(ess.getUser(p).isJailed() == true))
 							{
-								if (p.hasPermission(("autoexp.donor")))
+								if (!(ess.getUser(p).isAfk() == true))
 									{
-										if (CurrentExp < getConfig().getInt("minExpPoints"))
+										if (p.hasPermission(("autoexp.donor")))
 											{
-												int totalGiven = getConfig().getInt("expGivenForUnderMin") * getConfig().getInt("donorMultiplier");
-												p.giveExp(totalGiven);
+												if (CurrentExp < getConfig().getInt("minExpPoints"))
+													{
+
+														int totalGiven = getConfig().getInt("expGivenForUnderMin") * getConfig().getInt("donorMultiplier")
+																* getConfig().getInt("multiplierValue");
+														p.giveExp(totalGiven);
+
+													}
+												else
+													{
+														int totalGiven = getConfig().getInt("expGivenForAboveMin") * getConfig().getInt("donorMultiplier")
+																* getConfig().getInt("multiplierValue");
+														p.giveExp(totalGiven);
+
+													}
 											}
 										else
 											{
-												int totalGiven2 = getConfig().getInt("expGivenForAboveMin") * getConfig().getInt("donorMultiplier");
-												p.giveExp(totalGiven2);
+												if (CurrentExp < getConfig().getInt("minExpPoints"))
+													{
+														p.giveExp(getConfig().getInt("expGivenForUnderMin") * getConfig().getInt("multiplierValue"));
 
-											}
-									}
-								else
-									{
-										if (CurrentExp < getConfig().getInt("minExpPoints"))
-											{
-												p.giveExp(getConfig().getInt("expGivenForUnderMin"));
-
-											}
-										else
-											{
-												p.giveExp(getConfig().getInt("expGivenForAboveMin"));
+													}
+												else
+													{
+														p.giveExp(getConfig().getInt("expGivenForAboveMin") * getConfig().getInt("multiplierValue"));
+													}
 											}
 									}
 							}
+					}
+				else
+					{
+						if (!(ess.getUser(p).isJailed() == true))
+
+							{
+								if (!(ess.getUser(p).isAfk() == true))
+									{
+										if (p.hasPermission(("autoexp.donor")))
+											{
+												if (CurrentExp < getConfig().getInt("minExpPoints"))
+													{
+
+														int totalGiven = getConfig().getInt("expGivenForUnderMin") * getConfig().getInt("donorMultiplier");
+														p.giveExp(totalGiven);
+
+													}
+												else
+													{
+														int totalGiven = getConfig().getInt("expGivenForAboveMin") * getConfig().getInt("donorMultiplier");
+														p.giveExp(totalGiven);
+
+													}
+											}
+										else
+											{
+												if (CurrentExp < getConfig().getInt("minExpPoints"))
+													{
+														p.giveExp(getConfig().getInt("expGivenForUnderMin"));
+
+													}
+												else
+													{
+														p.giveExp(getConfig().getInt("expGivenForAboveMin"));
+													}
+											}
+									}
+							}
+
 					}
 			}
 
@@ -93,12 +145,25 @@ public class Main extends JavaPlugin implements Listener
 								actualGiveExp(p, CurrentExp);
 							}
 					}
+
 			}
 
 		public void changeConfig(String[] args, CommandSender sender)
 			{
 				float num = Float.parseFloat(args[2]);
 				this.getConfig().set(args[1], num);
+				this.saveConfig();
+				this.reloadConfig();
+				sender.sendMessage(ChatColor.GREEN + "Configuration value \"" + args[1] + "\" set to \"" + args[2] + "\"");
+				this.getServer().getScheduler().cancelTasks(this);
+				initializeExpGiving();
+				sender.sendMessage(ChatColor.GREEN + "Configuration has been Reloaded!");
+			}
+
+		public void changeBoolean(String[] args, CommandSender sender)
+			{
+				boolean submission = Boolean.parseBoolean(args[2]);
+				this.getConfig().set(args[1], submission);
 				this.saveConfig();
 				this.reloadConfig();
 				sender.sendMessage(ChatColor.GREEN + "Configuration value \"" + args[1] + "\" set to \"" + args[2] + "\"");
@@ -150,38 +215,42 @@ public class Main extends JavaPlugin implements Listener
 									{
 										if (args.length == 1 || args.length == 2)
 											{
-												sender.sendMessage(ChatColor.RED + "Usage: /autoexp setval " + ChatColor.YELLOW
-														+ "(expGivenForAboveMin / expGivenForUnderMin / minExpPoints / timeInSeconds / donorMultiplier) (value)");
+												sender
+														.sendMessage(ChatColor.RED
+																+ "Usage: /autoexp setval "
+																+ ChatColor.YELLOW
+																+ "(expGivenForAboveMin / expGivenForUnderMin / minExpPoints / timeInSeconds / donorMultiplier / enableMultiplier / multiplierValue) (value)");
 												return true;
 											}
 										else if (args.length > 1)
 											{
-												if ((args[1].equals("expGivenForAboveMin"))
-														|| ((args[1].equals("expGivenForUnderMin")))
+												if ((args[1].equals("expGivenForAboveMin")) || ((args[1].equals("expGivenForUnderMin")))
 														|| ((args[1].equals("minExpPoints")))
-														|| ((args[1].equals("timeInSeconds")) || ((args[1].equals("donorMultiplier")))))
+														|| ((args[1].equals("timeInSeconds")) || ((args[1].equals("donorMultiplier")) || (args[1].equals("multiplierValue")))))
 													{
 														changeConfig(args, sender);
 														return true;
 
 													}
-												else
+												else if (args[1].equals("enableMultiplier"))
 													{
 
-														sender.sendMessage(ChatColor.RED + "Please make sure you are using " + ChatColor.YELLOW
-																+ " (expGivenForAboveMin / expGivenForUnderMin / minExpPoints / timeInSeconds / donorMultiplier)");
+														changeBoolean(args, sender);
 														return true;
 
 													}
+												sender.sendMessage(ChatColor.RED + "Please make sure you are using " + ChatColor.YELLOW
+														+ " (expGivenForAboveMin / expGivenForUnderMin / minExpPoints / timeInSeconds / donorMultiplier / enableMultiplier / multiplierValue)");
+												return true;
 
 											}
 									}
+								else
+									{
+										sender.sendMessage(ChatColor.RED + "You're not allowed to use that!");
+										return true;
+									}
 
-							}
-						else
-							{
-								sender.sendMessage(ChatColor.RED + "You're not allowed to use that!");
-								return true;
 							}
 
 					}

@@ -22,3 +22,13 @@ donorMultiplier: 2
 #Do you want permissions to allow the receiving of EXP?
 #Permission is autoexp.receiveexp
 useReceiveExpPermission: false
+
+#Multiplier
+#true/false. This will times the donorMultiplier by that amount aswell.
+#Default: false
+enableMultiplier: false
+
+#Multiplier amount
+#Integer, (1,2,3,4,5 etc)
+#Default: 2
+multiplierValue: 2
