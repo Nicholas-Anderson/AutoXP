@@ -171,11 +171,7 @@ public class Main extends JavaPlugin implements Listener
 
 		public void changeBoolean(String[] args, CommandSender sender)
 			{
-				if (!(args[2].equals("true") || (!(args[2].equals("false")))))
-					{
-						sender.sendMessage("This has to be true or false.");
-					}
-				else
+				if (args[2].equals("true") || (args[2].equals("false")))
 					{
 						boolean submission = Boolean.parseBoolean(args[2]);
 						this.getConfig().set(args[1], submission);
@@ -185,6 +181,11 @@ public class Main extends JavaPlugin implements Listener
 						this.getServer().getScheduler().cancelTasks(this);
 						initializeExpGiving();
 						sender.sendMessage(ChatColor.GREEN + "Configuration has been Reloaded!");
+					}
+				else
+					{
+						
+						sender.sendMessage("This has to be true or false.");
 					}
 
 			}
