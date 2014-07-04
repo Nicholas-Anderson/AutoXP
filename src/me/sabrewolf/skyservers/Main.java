@@ -152,16 +152,15 @@ public class Main extends JavaPlugin implements Listener
 
 		public void changeConfig(String[] args, CommandSender sender)
 			{
-						float num = Float.parseFloat(args[2]);
-						this.getConfig().set(args[1], num);
-						this.saveConfig();
-						this.reloadConfig();
-						sender.sendMessage(ChatColor.GREEN + "Configuration value \"" + args[1] + "\" set to \"" + args[2] + "\"");
-						this.getServer().getScheduler().cancelTasks(this);
-						initializeExpGiving();
-						sender.sendMessage(ChatColor.GREEN + "Configuration has been Reloaded!");
-					
-				
+				float num = Float.parseFloat(args[2]);
+				this.getConfig().set(args[1], num);
+				this.saveConfig();
+				this.reloadConfig();
+				sender.sendMessage(ChatColor.GREEN + "Configuration value \"" + args[1] + "\" set to \"" + args[2] + "\"");
+				this.getServer().getScheduler().cancelTasks(this);
+				initializeExpGiving();
+				sender.sendMessage(ChatColor.GREEN + "Configuration has been Reloaded!");
+
 			}
 
 		public void changeBoolean(String[] args, CommandSender sender)
@@ -179,8 +178,8 @@ public class Main extends JavaPlugin implements Listener
 					}
 				else
 					{
-						
-						sender.sendMessage("This has to be true or false.");
+
+						sender.sendMessage(ChatColor.RED + "This has to be true or false.");
 					}
 
 			}
