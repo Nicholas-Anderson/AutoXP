@@ -152,8 +152,6 @@ public class Main extends JavaPlugin implements Listener
 
 		public void changeConfig(String[] args, CommandSender sender)
 			{
-				try
-					{
 						float num = Float.parseFloat(args[2]);
 						this.getConfig().set(args[1], num);
 						this.saveConfig();
@@ -162,11 +160,8 @@ public class Main extends JavaPlugin implements Listener
 						this.getServer().getScheduler().cancelTasks(this);
 						initializeExpGiving();
 						sender.sendMessage(ChatColor.GREEN + "Configuration has been Reloaded!");
-					}
-				catch (Exception e)
-					{
-						sender.sendMessage("Invalid input. Requires numbers.");
-					}
+					
+				
 			}
 
 		public void changeBoolean(String[] args, CommandSender sender)
